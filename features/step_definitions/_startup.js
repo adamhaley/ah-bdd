@@ -1,6 +1,9 @@
-module.exports = function() {
+var {defineSupportCode} = require('cucumber');
+
+defineSupportCode(function({Given, Then, When}) {
   this.World = require('../support/world').World
-  return this.Given('I am on Google', function(callback) {
+
+  return Given(/^I am on Google$/, function(callback) {
     var browser
     browser = require('wd').remote()
     browser.on('status', console.log)
@@ -9,4 +12,4 @@ module.exports = function() {
       return browser.get('http://google.com', callback)
     })
   })
-}
+})
